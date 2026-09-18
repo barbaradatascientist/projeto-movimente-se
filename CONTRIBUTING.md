@@ -167,3 +167,6 @@ Rode `git pull origin develop` dentro da sua branch, resolva os trechos marcados
 
 **"Onde eu vejo o que falta fazer?"**
 No Project (Kanban) do repositório, aba "Projects" — cada card é uma Issue.
+
+**"Como eu crio uma branch pra trabalhar em algo?"**
+Rode `git checkout develop` e depois `git pull origin develop` para atualizar sua branch `develop` local com a do repositório.

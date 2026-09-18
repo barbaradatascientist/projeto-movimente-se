@@ -15,3 +15,8 @@ Thumbs.db
 .vscode/
 .idea/
 coverage/
+venv/
+__pycache__/
+*.pyc
+.env
+db.sqlite3

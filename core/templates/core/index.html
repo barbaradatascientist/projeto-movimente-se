@@ -1,0 +1,248 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimente-se</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Importando o seu CSS Modular -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body data-theme="home">
+
+    <main id="app">
+        <!-- ==============================
+             PAGES (Páginas da Aplicação)
+             ============================== -->
+
+        <!-- PAGE: WELCOME -->
+        <section id="page-welcome" class="page active">
+            <h1>Movimente-se</h1>
+            <p>Conecte-se com a natureza. Descubra trilhas, junte-se a guias locais e explore o mundo ao ar livre com a
+                comunidade.</p>
+            <button class="btn btn-primary" onclick="showAuth()">Começar Agora <i
+                    class="fas fa-arrow-right"></i></button>
+        </section>
+
+        <!-- PAGE: AUTH -->
+        <section id="page-auth" class="page">
+            <div id="auth-container">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" onclick="switchAuthTab('login')">Login</div>
+                    <div class="auth-tab" onclick="switchAuthTab('register')">Cadastrar</div>
+                </div>
+
+                <div id="form-login" class="auth-form active">
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="seu@email.com">
+                    </div>
+                    <div class="input-group">
+                        <label>Senha</label>
+                        <input type="password" placeholder="••••••••">
+                    </div>
+                    <span class="forgot-pw" onclick="alert('Link de recuperação enviado para o email!')">Esqueci minha
+                        senha</span>
+                    <button class="btn btn-primary" onclick="loginSuccess()">Entrar</button>
+                </div>
+
+                <div id="form-register" class="auth-form">
+                    <div class="input-group">
+                        <label>Nome Completo</label>
+                        <input type="text" placeholder="Seu nome">
+                    </div>
+                    <div class="input-group"><label>Email</label><input type="email"></div>
+                    <div class="input-group"><label>Senha</label><input type="password"></div>
+                    <button class="btn btn-primary" onclick="loginSuccess()">Criar Conta</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE: HOME -->
+        <section id="page-home" class="page">
+            <header class="page-header">
+                <h2 class="page-title"><i class="fas fa-mountain"></i> Explorar Trilhas</h2>
+                <i class="fas fa-search" style="color: var(--neutral-gray); font-size: 1.2rem; cursor: pointer;"></i>
+            </header>
+
+            <div class="card-grid">
+                <!-- Componente: Activity Card -->
+                <div class="activity-card"
+                    onclick="openDetails('Trilha Pico da Bandeira', 'Trekking intenso de 2 dias...', 'Marcos Guia', true)">
+                    <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=600&q=80"
+                        alt="Trilha" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">Trilha Pico da Bandeira</h3>
+                        <div class="card-meta"><span>📍 Alto Caparaó, MG</span> <span>🥾 14 km</span></div>
+                        <div class="guide-info">
+                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80"
+                                class="guide-avatar">
+                            <div><span style="font-size: 0.9rem; font-weight: 500;">Marcos Guia</span><span
+                                    class="badge">Comunidade Ativa</span></div>
+                        </div>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> (120)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE: COMMUNITY -->
+        <section id="page-community" class="page">
+            <header class="page-header">
+                <h2 class="page-title"><i class="fas fa-users"></i> Comunidade</h2>
+            </header>
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="guide-avatar" style="background-color: var(--moss-green)"></div>
+                    <div>
+                        <div style="font-weight: 600;">Grupo Trilheiros SP</div>
+                        <div style="font-size: 0.8rem; color: var(--neutral-gray);">Lucas postou há 2h</div>
+                    </div>
+                </div>
+                <p>Treino finalizado! A subida foi dura mas a vista compensou demais.</p>
+                <div class="strava-mock">
+                    <i class="fab fa-strava"></i>
+                    <div>
+                        <div style="font-weight: 600; font-size: 0.9rem;">Corrida Matinal</div>
+                        <div style="font-size: 0.8rem;">Distância: 8.5km</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE: CHAT -->
+        <section id="page-chat" class="page">
+            <header class="page-header">
+                <h2 class="page-title"><i class="fas fa-comments"></i> Mensagens</h2>
+            </header>
+            <div class="chat-list">
+                <div class="chat-item">
+                    <div class="chat-avatar" style="background: var(--moss-green);"><i class="fas fa-users"></i></div>
+                    <div class="chat-info">
+                        <div class="chat-name">Expedição Caparaó</div>
+                        <div class="chat-msg">Marcos: Lembrem de levar lanterna!</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE: SUBSCRIBED -->
+        <section id="page-subscribed" class="page">
+            <header class="page-header">
+                <h2 class="page-title"><i class="fas fa-calendar-check"></i> Próximas Atividades</h2>
+            </header>
+            <div class="card-grid">
+                <div class="activity-card">
+                    <div class="card-content">
+                        <span class="badge"
+                            style="background: var(--earth-brown); color: white; margin-bottom: 10px; display: inline-block;">Neste
+                            Sábado</span>
+                        <h3 class="card-title">Caminhada Ecológica</h3>
+                        <div class="card-meta"><span>18 de Out. às 08:00</span></div>
+                        <button class="btn btn-outline" style="margin-top: 15px; border-color: #ff4757; color: #ff4757;"
+                            onclick="alert('Inscrição cancelada')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE: PROFILE -->
+        <section id="page-profile" class="page">
+            <div class="profile-header">
+                <div class="profile-avatar"></div>
+                <h2>João Aventureiro</h2>
+            </div>
+            <div class="profile-actions">
+                <button class="btn btn-outline" onclick="navigateSubPage('history')"><i class="fas fa-history"></i> Meu
+                    Histórico</button>
+                <button class="btn btn-primary" style="background: var(--earth-brown);"
+                    onclick="navigateSubPage('guide-dash')"><i class="fas fa-map-marked-alt"></i> Painel do
+                    Guia</button>
+                <button class="btn btn-outline" style="border-color: #ff4757; color: #ff4757;" onclick="logout()"><i
+                        class="fas fa-sign-out-alt"></i> Sair</button>
+            </div>
+        </section>
+
+        <!-- SUB-PAGE: GUIDE DASHBOARD -->
+        <section id="page-guide-dash" class="page">
+            <header class="page-header">
+                <div class="page-title"><i class="fas fa-arrow-left action-link" onclick="navigate('profile')"
+                        style="font-size: 1.2rem;"></i> Painel do Guia</div>
+            </header>
+            <button class="btn btn-primary"
+                onclick="document.getElementById('modal-create-event').classList.add('active')"
+                style="margin-bottom: 20px;">
+                <i class="fas fa-plus"></i> Criar Novo Exercício
+            </button>
+        </section>
+
+        <!-- SUB-PAGE: HISTORY -->
+        <section id="page-history" class="page">
+            <header class="page-header">
+                <div class="page-title"><i class="fas fa-arrow-left action-link" onclick="navigate('profile')"
+                        style="font-size: 1.2rem;"></i> Histórico</div>
+            </header>
+        </section>
+
+    </main>
+
+    <!-- ==============================
+         COMPONENTS (Reutilizáveis)
+         ============================== -->
+
+    <!-- COMPONENT: BOTTOM NAV -->
+    <nav id="main-nav" class="bottom-nav">
+        <a href="#" class="nav-item active" data-target="home" data-theme="home"><i
+                class="fas fa-compass"></i><span>Explorar</span></a>
+        <a href="#" class="nav-item" data-target="community" data-theme="community"><i
+                class="fas fa-users"></i><span>Comunidade</span></a>
+        <a href="#" class="nav-item" data-target="chat" data-theme="chat"><i
+                class="fas fa-comment-dots"></i><span>Chat</span></a>
+        <a href="#" class="nav-item" data-target="subscribed" data-theme="subscribed"><i
+                class="fas fa-calendar-check"></i><span>Inscritos</span></a>
+        <a href="#" class="nav-item" data-target="profile" data-theme="profile"><i
+                class="fas fa-user"></i><span>Perfil</span></a>
+    </nav>
+
+    <!-- COMPONENT: MODAL DETALHES -->
+    <div id="modal-details" class="modal-overlay">
+        <div class="modal-content">
+            <i class="fas fa-times close-modal" onclick="closeModal('modal-details')"></i>
+            <h2 id="detail-title" style="margin-bottom: 15px; margin-top: 10px;">Título</h2>
+            <div class="guide-info">
+                <div><span id="detail-guide" style="font-weight: 600;">Guia</span> <span id="detail-badge" class="badge"
+                        style="display:none;">Comunidade Ativa</span></div>
+            </div>
+            <p id="detail-desc">Descrição do exercício aqui...</p>
+            <button class="btn btn-primary"
+                onclick="alert('Inscrição confirmada!'); closeModal('modal-details');">Participar
+                (Inscrever-se)</button>
+        </div>
+    </div>
+
+    <!-- COMPONENT: MODAL CRIAR EVENTO -->
+    <div id="modal-create-event" class="modal-overlay">
+        <div class="modal-content">
+            <i class="fas fa-times close-modal" onclick="closeModal('modal-create-event')"></i>
+            <h2 style="margin-bottom: 20px;">Publicar Exercício</h2>
+            <div class="input-group"><label>Título</label><input type="text"></div>
+            <button class="btn btn-primary"
+                onclick="alert('Publicado!'); closeModal('modal-create-event');">Publicar</button>
+        </div>
+    </div>
+
+    <!-- Importando seus Services -->
+    <script src="./Services/navigationService.js"></script>
+    <script src="./Services/authService.js"></script>
+    <script src="{% static 'script.js' %}"></script>
+</body>
+
+</html>
